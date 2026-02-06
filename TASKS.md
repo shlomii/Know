@@ -14,16 +14,16 @@
 Set up the base Next.js 14 project with App Router, TypeScript, Tailwind CSS, and shadcn/ui.
 
 **Acceptance Criteria:**
-- [ ] Next.js 14 project created with App Router enabled
-- [ ] TypeScript configured with strict mode
-- [ ] Tailwind CSS installed and configured
-- [ ] shadcn/ui installed with base components (Button, Card, Input, Dialog, Sheet, etc.)
-- [ ] Project structure: `/app`, `/components`, `/lib`, `/prisma`, `/types`
-- [ ] ESLint and Prettier configured
-- [ ] Path aliases (`@/`) configured in tsconfig
-- [ ] `npm run dev` starts without errors
+- [x] Next.js 14 project created with App Router enabled
+- [x] TypeScript configured with strict mode
+- [x] Tailwind CSS installed and configured
+- [x] shadcn/ui installed with base components (Button, Card, Input, Dialog, Sheet, etc.)
+- [x] Project structure: `/app`, `/components`, `/lib`, `/prisma`, `/types`
+- [x] ESLint and Prettier configured
+- [x] Path aliases (`@/`) configured in tsconfig
+- [x] `npm run dev` starts without errors
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -33,8 +33,8 @@ Set up the base Next.js 14 project with App Router, TypeScript, Tailwind CSS, an
 Define the complete database schema in Prisma and set up PostgreSQL connection.
 
 **Acceptance Criteria:**
-- [ ] Prisma installed and configured
-- [ ] Complete schema with all models:
+- [x] Prisma installed and configured
+- [x] Complete schema with all models:
   - `User` (id, email, passwordHash, name, avatarUrl, role, xp, level, streakCount, streakLastDate, createdAt)
   - `Course` (id, title, description, learningObjectives, status, sourceFilePath, sourceText, createdBy, createdAt, publishedAt)
   - `Module` (id, courseId, title, description, order, passingScore)
@@ -46,11 +46,11 @@ Define the complete database schema in Prisma and set up PostgreSQL connection.
   - `UserBadge` (id, userId, badgeId, earnedAt)
   - `ChatMessage` (id, userId, courseId, elementType, elementId, role, content, createdAt)
   - `CourseReviewLog` (id, courseId, roundNumber, studentFeedback, authorChanges, createdAt)
-- [ ] Initial migration generated and applies cleanly
-- [ ] Seed script creates: default badges, default admin user
-- [ ] Database connection works in dev environment
+- [x] Initial migration generated and applies cleanly
+- [x] Seed script creates: default badges, default admin user
+- [x] Database connection works in dev environment
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -60,18 +60,18 @@ Define the complete database schema in Prisma and set up PostgreSQL connection.
 Full authentication system with registration, login, logout, JWT sessions, and role-based access.
 
 **Acceptance Criteria:**
-- [ ] NextAuth.js configured with credentials provider
-- [ ] Registration endpoint: `POST /api/auth/register` (email, password, name)
-- [ ] Passwords hashed with bcrypt (12 rounds)
-- [ ] JWT session with user id, email, role in token
-- [ ] Login/Logout flow working
-- [ ] Auth middleware protecting API routes
-- [ ] Role-based middleware: `requireAdmin()`, `requireAuth()`
-- [ ] Registration page UI (`/register`)
-- [ ] Login page UI (`/login`)
-- [ ] Redirect unauthenticated users to login
+- [x] NextAuth.js configured with credentials provider
+- [x] Registration endpoint: `POST /api/auth/register` (email, password, name)
+- [x] Passwords hashed with bcrypt (12 rounds)
+- [x] JWT session with user id, email, role in token
+- [x] Login/Logout flow working
+- [x] Auth middleware protecting API routes
+- [x] Role-based middleware: `requireAdmin()`, `requireAuth()`
+- [x] Registration page UI (`/register`)
+- [x] Login page UI (`/login`)
+- [x] Redirect unauthenticated users to login
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -81,19 +81,19 @@ Full authentication system with registration, login, logout, JWT sessions, and r
 Create the main app layout with responsive navigation, header, and core pages.
 
 **Acceptance Criteria:**
-- [ ] Root layout with sidebar navigation (desktop) and bottom tab bar (mobile)
-- [ ] Header: logo, user avatar, XP counter, streak display
-- [ ] Navigation items: Dashboard, Courses, Leaderboard, Profile
-- [ ] Dashboard page (placeholder content)
-- [ ] Courses page (placeholder content)
-- [ ] Leaderboard page (placeholder content)
-- [ ] Profile page (placeholder content)
-- [ ] Responsive breakpoints: mobile (<768px), tablet (768-1024px), desktop (>1024px)
-- [ ] Loading skeleton components
-- [ ] Error boundary component
-- [ ] Toast notification system (for badges, achievements, errors)
+- [x] Root layout with sidebar navigation (desktop) and bottom tab bar (mobile)
+- [x] Header: logo, user avatar, XP counter, streak display
+- [x] Navigation items: Dashboard, Courses, Leaderboard, Profile
+- [x] Dashboard page (placeholder content)
+- [x] Courses page (placeholder content)
+- [x] Leaderboard page (placeholder content)
+- [x] Profile page (placeholder content)
+- [x] Responsive breakpoints: mobile (<768px), tablet (768-1024px), desktop (>1024px)
+- [x] Loading skeleton components
+- [x] Error boundary component
+- [x] Toast notification system (for badges, achievements, errors)
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -105,17 +105,17 @@ Create the main app layout with responsive navigation, header, and core pages.
 Create the operator's file upload interface for importing course source material.
 
 **Acceptance Criteria:**
-- [ ] Upload page accessible to admin users only (`/admin/upload`)
-- [ ] Drag-and-drop zone with visual feedback
-- [ ] File picker button as fallback
-- [ ] File type validation: only .pdf, .txt, .md accepted
-- [ ] File size validation: max 50MB, clear error message
-- [ ] Upload progress bar
-- [ ] Preview of extracted text after upload
-- [ ] "Generate Course" button appears after successful upload
-- [ ] Mobile-optimized: file picker works on mobile browsers
+- [x] Upload page accessible to admin users only (`/admin/upload`)
+- [x] Drag-and-drop zone with visual feedback
+- [x] File picker button as fallback
+- [x] File type validation: only .pdf, .txt, .md accepted
+- [x] File size validation: max 50MB, clear error message
+- [x] Upload progress bar
+- [x] Preview of extracted text after upload
+- [x] "Generate Course" button appears after successful upload
+- [x] Mobile-optimized: file picker works on mobile browsers
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -125,17 +125,17 @@ Create the operator's file upload interface for importing course source material
 API endpoint that receives uploaded files, extracts text content, and stores both.
 
 **Acceptance Criteria:**
-- [ ] API route: `POST /api/courses/upload` (multipart form data)
-- [ ] PDF text extraction using `pdf-parse` library
-- [ ] TXT/MD files: direct text reading
-- [ ] Original file saved to `/uploads/{courseId}/{filename}`
-- [ ] Extracted text stored in `Course.sourceText` field
-- [ ] Course record created with status `draft`
-- [ ] Returns: courseId, extracted text preview (first 500 chars), total character count
-- [ ] Error handling: corrupt PDFs, empty files, unsupported formats
-- [ ] File size limit enforced server-side
+- [x] API route: `POST /api/courses/upload` (multipart form data)
+- [x] PDF text extraction using `pdf-parse` library
+- [x] TXT/MD files: direct text reading
+- [x] Original file saved to `/uploads/{courseId}/{filename}`
+- [x] Extracted text stored in `Course.sourceText` field
+- [x] Course record created with status `draft`
+- [x] Returns: courseId, extracted text preview (first 500 chars), total character count
+- [x] Error handling: corrupt PDFs, empty files, unsupported formats
+- [x] File size limit enforced server-side
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -147,17 +147,17 @@ API endpoint that receives uploaded files, extracts text content, and stores bot
 Create a reusable AI service layer wrapping the Anthropic Claude SDK.
 
 **Acceptance Criteria:**
-- [ ] `@anthropic-ai/sdk` installed
-- [ ] AI service class/module at `/lib/ai/anthropic.ts`
-- [ ] Configurable API key via environment variable `ANTHROPIC_API_KEY`
-- [ ] Helper for structured JSON output (parse AI response as JSON)
-- [ ] Streaming support for long generations
-- [ ] Retry logic with exponential backoff for transient errors
-- [ ] Token usage logging
-- [ ] Rate limit handling
-- [ ] Error types: `AIServiceError`, `AIRateLimitError`, `AIParseError`
+- [x] `@anthropic-ai/sdk` installed
+- [x] AI service class/module at `/lib/ai/anthropic.ts`
+- [x] Configurable API key via environment variable `ANTHROPIC_API_KEY`
+- [x] Helper for structured JSON output (parse AI response as JSON)
+- [x] Streaming support for long generations
+- [x] Retry logic with exponential backoff for transient errors
+- [x] Token usage logging
+- [x] Rate limit handling
+- [x] Error types: `AIServiceError`, `AIRateLimitError`, `AIParseError`
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -167,17 +167,17 @@ Create a reusable AI service layer wrapping the Anthropic Claude SDK.
 The Author Agent analyzes source material and creates a structured course skeleton with deductive ordering.
 
 **Acceptance Criteria:**
-- [ ] System prompt crafted for expert instructional designer role
-- [ ] Step 1: Extract all key concepts and topics from source text
-- [ ] Step 2: Identify concept dependencies (prerequisite relationships)
-- [ ] Step 3: Order topics deductively (general → specific, prerequisite → dependent)
-- [ ] Step 4: Group into modules (logical topic clusters)
-- [ ] Step 5: Split modules into bite-sized lessons (one concept per lesson, 2-3 min read)
-- [ ] Output: Structured JSON with course title, description, learning objectives, modules with lesson titles
-- [ ] Handles large source texts (chunking if needed for token limits)
-- [ ] Prompt includes pedagogical guidelines: scaffolding, Bloom's taxonomy, engagement
+- [x] System prompt crafted for expert instructional designer role
+- [x] Step 1: Extract all key concepts and topics from source text
+- [x] Step 2: Identify concept dependencies (prerequisite relationships)
+- [x] Step 3: Order topics deductively (general → specific, prerequisite → dependent)
+- [x] Step 4: Group into modules (logical topic clusters)
+- [x] Step 5: Split modules into bite-sized lessons (one concept per lesson, 2-3 min read)
+- [x] Output: Structured JSON with course title, description, learning objectives, modules with lesson titles
+- [x] Handles large source texts (chunking if needed for token limits)
+- [x] Prompt includes pedagogical guidelines: scaffolding, Bloom's taxonomy, engagement
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -187,21 +187,21 @@ The Author Agent analyzes source material and creates a structured course skelet
 Generate full lesson content and quiz questions for each module.
 
 **Acceptance Criteria:**
-- [ ] For each lesson, generate:
+- [x] For each lesson, generate:
   - Engaging content with analogies, examples, real-world connections
   - Conversational but informative tone
   - Key takeaways (2-3 bullet points)
   - Content in markdown format
-- [ ] For each module, generate quiz questions:
+- [x] For each module, generate quiz questions:
   - 3-5 questions per module
   - Types: multiple choice (4 options), true/false, fill-in-the-blank
   - Difficulty progression: easy → medium → hard
   - Each question has explanation for correct answer
   - Questions test understanding, not just memorization (Bloom's: Apply, Analyze)
-- [ ] Content is engaging, uses analogies, avoids dry textbook style
-- [ ] Output as structured JSON matching the database schema
+- [x] Content is engaging, uses analogies, avoids dry textbook style
+- [x] Output as structured JSON matching the database schema
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -211,19 +211,19 @@ Generate full lesson content and quiz questions for each module.
 Generate an SVG concept diagram for every lesson.
 
 **Acceptance Criteria:**
-- [ ] For each lesson, generate an SVG that visualizes the core concept
-- [ ] SVG style guide in prompt:
+- [x] For each lesson, generate an SVG that visualizes the core concept
+- [x] SVG style guide in prompt:
   - Clean, colorful, geometric shapes
   - Labeled elements
   - Max 500x300px viewBox
   - Use only: rect, circle, ellipse, line, polyline, polygon, path, text, g, defs, linearGradient
   - No external images, no scripts, no CSS imports
-- [ ] SVG validation: well-formed XML
-- [ ] SVG sanitization: strip any script tags, event handlers, external references
-- [ ] Fallback: generate a simple colored icon/shape if full SVG fails
-- [ ] SVGs should be informational, not decorative — actually represent the concept
+- [x] SVG validation: well-formed XML
+- [x] SVG sanitization: strip any script tags, event handlers, external references
+- [x] Fallback: generate a simple colored icon/shape if full SVG fails
+- [x] SVGs should be informational, not decorative — actually represent the concept
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -233,27 +233,27 @@ Generate an SVG concept diagram for every lesson.
 AI agent that simulates a student going through the course and provides structured feedback.
 
 **Acceptance Criteria:**
-- [ ] System prompt for beginner student persona
-- [ ] Round 1 — Structural Review:
+- [x] System prompt for beginner student persona
+- [x] Round 1 — Structural Review:
   - Knowledge gaps (lesson assumes untaught concepts)
   - Prerequisite ordering issues
   - Difficulty jumps
   - Missing foundational concepts
-- [ ] Round 2 — Clarity & Engagement Review:
+- [x] Round 2 — Clarity & Engagement Review:
   - Confusing explanations
   - Dry/boring sections
   - Unhelpful analogies
   - Quiz questions that don't match taught content
   - Engagement rating per lesson
-- [ ] Round 3 — Polish & Fun Review:
+- [x] Round 3 — Polish & Fun Review:
   - Language tone and fun factor
   - "Aha moment" opportunities
   - SVG accuracy check
   - Overall consistency
-- [ ] Output per round: structured JSON feedback with specific lesson/question references
-- [ ] Feedback includes severity (critical/important/suggestion)
+- [x] Output per round: structured JSON feedback with specific lesson/question references
+- [x] Feedback includes severity (critical/important/suggestion)
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -263,7 +263,7 @@ AI agent that simulates a student going through the course and provides structur
 Orchestrate 3 cycles of Student review → Author revision.
 
 **Acceptance Criteria:**
-- [ ] Orchestrator function that runs the full pipeline:
+- [x] Orchestrator function that runs the full pipeline:
   1. Author generates initial course
   2. Student reviews (Round 1) → Feedback
   3. Author revises based on feedback
@@ -271,14 +271,14 @@ Orchestrate 3 cycles of Student review → Author revision.
   5. Author revises based on feedback
   6. Student reviews (Round 3) → Feedback
   7. Author makes final revisions
-- [ ] Each round's feedback and changes stored in `CourseReviewLog`
-- [ ] Status updates emitted at each stage (for progress UI)
-- [ ] Full pipeline handles errors gracefully (retry individual steps)
-- [ ] Final course saved to database (Modules, Lessons, QuizQuestions)
-- [ ] Course status set to `in_review` after pipeline completes
-- [ ] Total pipeline is resumable if interrupted
+- [x] Each round's feedback and changes stored in `CourseReviewLog`
+- [x] Status updates emitted at each stage (for progress UI)
+- [x] Full pipeline handles errors gracefully (retry individual steps)
+- [x] Final course saved to database (Modules, Lessons, QuizQuestions)
+- [x] Course status set to `in_review` after pipeline completes
+- [x] Total pipeline is resumable if interrupted
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -288,8 +288,8 @@ Orchestrate 3 cycles of Student review → Author revision.
 Real-time progress page showing course generation pipeline status.
 
 **Acceptance Criteria:**
-- [ ] Progress page at `/admin/courses/{id}/generating`
-- [ ] Status updates via polling (every 3s) or SSE:
+- [x] Progress page at `/admin/courses/{id}/generating`
+- [x] Status updates via polling (every 3s) or SSE:
   - "Analyzing source material..."
   - "Identifying key concepts..."
   - "Structuring course outline..."
@@ -302,12 +302,12 @@ Real-time progress page showing course generation pipeline status.
   - "AI Student Review — Round 3 of 3..."
   - "Applying final improvements..."
   - "Course ready for review!"
-- [ ] Progress bar showing overall completion
-- [ ] Expandable log showing details of each step
-- [ ] Error state with "Retry" button
-- [ ] Auto-redirect to edit mode when complete
+- [x] Progress bar showing overall completion
+- [x] Expandable log showing details of each step
+- [x] Error state with "Retry" button
+- [x] Auto-redirect to edit mode when complete
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -319,20 +319,20 @@ Real-time progress page showing course generation pipeline status.
 Operator walks through the course card-by-card in edit mode.
 
 **Acceptance Criteria:**
-- [ ] Edit mode page at `/admin/courses/{id}/edit`
-- [ ] Course overview sidebar: module list with lesson titles, expandable
-- [ ] Card-by-card lesson view (same layout as learner view)
-- [ ] Edit button on: lesson title, lesson content, SVG, key takeaways
-- [ ] Inline editing with markdown support (content editable or textarea with preview)
-- [ ] Quiz question editing: edit question text, options, correct answer, explanation
-- [ ] Add new lesson / delete lesson buttons
-- [ ] Add new quiz question / delete question buttons
-- [ ] Drag-and-drop reordering of lessons within a module
-- [ ] Drag-and-drop reordering of modules
-- [ ] Save changes button (persists to database)
-- [ ] "Preview as Learner" button (read-only view)
+- [x] Edit mode page at `/admin/courses/{id}/edit`
+- [x] Course overview sidebar: module list with lesson titles, expandable
+- [x] Card-by-card lesson view (same layout as learner view)
+- [x] Edit button on: lesson title, lesson content, SVG, key takeaways
+- [x] Inline editing with markdown support (content editable or textarea with preview)
+- [x] Quiz question editing: edit question text, options, correct answer, explanation
+- [x] Add new lesson / delete lesson buttons
+- [x] Add new quiz question / delete question buttons
+- [x] Drag-and-drop reordering of lessons within a module
+- [x] Drag-and-drop reordering of modules
+- [x] Save changes button (persists to database)
+- [x] "Preview as Learner" button (read-only view)
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -342,17 +342,17 @@ Operator walks through the course card-by-card in edit mode.
 Every course element has a chat icon that opens a panel for conversational AI editing.
 
 **Acceptance Criteria:**
-- [ ] Chat icon on every: lesson card, quiz question, answer option, SVG
-- [ ] Clicking opens slide-out panel (right side desktop, bottom sheet mobile)
-- [ ] Chat interface: message input, send button, message history
-- [ ] Messages sent to Anthropic API via `/api/chat/element`
-- [ ] API receives: elementType, elementId, message, and injects full context (current element content + course structure summary)
-- [ ] AI responses streamed and rendered as markdown
-- [ ] Chat history persisted in `ChatMessage` table
-- [ ] Previous chat history loaded when reopening panel for same element
-- [ ] Suggested quick actions: "Simplify", "Add example", "Make more fun", "Regenerate SVG"
+- [x] Chat icon on every: lesson card, quiz question, answer option, SVG
+- [x] Clicking opens slide-out panel (right side desktop, bottom sheet mobile)
+- [x] Chat interface: message input, send button, message history
+- [x] Messages sent to Anthropic API via `/api/chat/element`
+- [x] API receives: elementType, elementId, message, and injects full context (current element content + course structure summary)
+- [x] AI responses streamed and rendered as markdown
+- [x] Chat history persisted in `ChatMessage` table
+- [x] Previous chat history loaded when reopening panel for same element
+- [x] Suggested quick actions: "Simplify", "Add example", "Make more fun", "Regenerate SVG"
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -362,15 +362,15 @@ Every course element has a chat icon that opens a panel for conversational AI ed
 When AI suggests content changes in chat, operator can accept, edit, or reject.
 
 **Acceptance Criteria:**
-- [ ] AI responses that contain replacement content are formatted as suggestions
-- [ ] "Accept" button: replaces the element's content with AI suggestion, saves to DB
-- [ ] "Edit" button: opens suggestion in an editable field, operator modifies, then saves
-- [ ] "Reject" button: dismisses suggestion, keeps original content
-- [ ] For SVG suggestions: live preview of new SVG before accepting
-- [ ] Change history: track what was changed and when (for undo capability)
-- [ ] Undo last change button (reverts to previous version)
+- [x] AI responses that contain replacement content are formatted as suggestions
+- [x] "Accept" button: replaces the element's content with AI suggestion, saves to DB
+- [x] "Edit" button: opens suggestion in an editable field, operator modifies, then saves
+- [x] "Reject" button: dismisses suggestion, keeps original content
+- [x] For SVG suggestions: live preview of new SVG before accepting
+- [x] Change history: track what was changed and when (for undo capability)
+- [x] Undo last change button (reverts to previous version)
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -380,20 +380,20 @@ When AI suggests content changes in chat, operator can accept, edit, or reject.
 Operator publishes a reviewed course, making it available to learners.
 
 **Acceptance Criteria:**
-- [ ] "Publish" button on course edit page
-- [ ] Pre-publish validation:
+- [x] "Publish" button on course edit page
+- [x] Pre-publish validation:
   - Every module has at least 1 lesson
   - Every module has at least 1 quiz question
   - All lessons have content and SVG
   - All quiz questions have correct answers and explanations
-- [ ] Validation errors shown with links to fix issues
-- [ ] Status transition: `in_review` → `published`
-- [ ] Published date recorded
-- [ ] "Unpublish" button to revert to `in_review`
-- [ ] Published courses appear in learner course browser
-- [ ] Admin course list shows status badge (draft/in_review/published)
+- [x] Validation errors shown with links to fix issues
+- [x] Status transition: `in_review` → `published`
+- [x] Published date recorded
+- [x] "Unpublish" button to revert to `in_review`
+- [x] Published courses appear in learner course browser
+- [x] Admin course list shows status badge (draft/in_review/published)
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -405,19 +405,19 @@ Operator publishes a reviewed course, making it available to learners.
 Learners browse and enroll in published courses.
 
 **Acceptance Criteria:**
-- [ ] Courses page (`/courses`) shows grid of published course cards
-- [ ] Course card: title, description (truncated), module count, lesson count, difficulty indicator
-- [ ] If enrolled: show progress bar on card
-- [ ] Search bar: search by title and description
-- [ ] "Start Course" / "Continue" button on each card
-- [ ] Course detail page (`/courses/{id}`) with:
+- [x] Courses page (`/courses`) shows grid of published course cards
+- [x] Course card: title, description (truncated), module count, lesson count, difficulty indicator
+- [x] If enrolled: show progress bar on card
+- [x] Search bar: search by title and description
+- [x] "Start Course" / "Continue" button on each card
+- [x] Course detail page (`/courses/{id}`) with:
   - Full description
   - Learning objectives
   - Module/lesson outline (expandable)
   - "Enroll" or "Continue" button
-- [ ] Responsive grid: 1 column mobile, 2 tablet, 3 desktop
+- [x] Responsive grid: 1 column mobile, 2 tablet, 3 desktop
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -427,21 +427,21 @@ Learners browse and enroll in published courses.
 The core learning experience: card-based lessons with SVG visualizations.
 
 **Acceptance Criteria:**
-- [ ] Lesson page: `/courses/{courseId}/modules/{moduleId}/lessons/{lessonId}`
-- [ ] Full-screen card layout:
+- [x] Lesson page: `/courses/{courseId}/modules/{moduleId}/lessons/{lessonId}`
+- [x] Full-screen card layout:
   - SVG visualization at top (rendered inline, responsive)
   - Lesson title
   - Content body (rendered markdown with syntax highlighting for code)
   - Key takeaways at bottom
-- [ ] Navigation: "Previous" and "Next" buttons
-- [ ] Swipe left/right on mobile (touch gesture support)
-- [ ] Progress bar at top showing position within module
-- [ ] Lesson auto-marked as completed when navigating to next
-- [ ] XP awarded on lesson completion (+10 XP)
-- [ ] Smooth transitions between lessons
-- [ ] "Back to course" breadcrumb
+- [x] Navigation: "Previous" and "Next" buttons
+- [x] Swipe left/right on mobile (touch gesture support)
+- [x] Progress bar at top showing position within module
+- [x] Lesson auto-marked as completed when navigating to next
+- [x] XP awarded on lesson completion (+10 XP)
+- [x] Smooth transitions between lessons
+- [x] "Back to course" breadcrumb
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -451,22 +451,22 @@ The core learning experience: card-based lessons with SVG visualizations.
 Quiz interface at the end of each module with per-question feedback.
 
 **Acceptance Criteria:**
-- [ ] Quiz page: `/courses/{courseId}/modules/{moduleId}/quiz`
-- [ ] One question per screen
-- [ ] Multiple choice: tap option to select, "Check" button to submit
-- [ ] True/False: two large buttons
-- [ ] Fill-in-the-blank: text input with "Check" button
-- [ ] Immediate feedback:
+- [x] Quiz page: `/courses/{courseId}/modules/{moduleId}/quiz`
+- [x] One question per screen
+- [x] Multiple choice: tap option to select, "Check" button to submit
+- [x] True/False: two large buttons
+- [x] Fill-in-the-blank: text input with "Check" button
+- [x] Immediate feedback:
   - Correct: green highlight + "Correct!" + explanation
   - Wrong: red highlight + "Not quite" + show correct answer + explanation
-- [ ] Navigation to next question after feedback
-- [ ] Score summary screen at end: X/Y correct, percentage, XP earned
-- [ ] XP awarded: +25 base + 5 per correct + 50 bonus for perfect score
-- [ ] "Retry Quiz" button
-- [ ] Must meet passing score to unlock next module (show if locked)
-- [ ] Quiz attempt saved to `QuizAttempt` table
+- [x] Navigation to next question after feedback
+- [x] Score summary screen at end: X/Y correct, percentage, XP earned
+- [x] XP awarded: +25 base + 5 per correct + 50 bonus for perfect score
+- [x] "Retry Quiz" button
+- [x] Must meet passing score to unlock next module (show if locked)
+- [x] Quiz attempt saved to `QuizAttempt` table
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -476,21 +476,21 @@ Quiz interface at the end of each module with per-question feedback.
 User dashboard showing learning progress across all courses.
 
 **Acceptance Criteria:**
-- [ ] Dashboard page (`/dashboard`) as the home page for logged-in users
-- [ ] "Continue Learning" card: most recent in-progress course with resume button
-- [ ] Per-course progress: completed lessons / total, best quiz scores
-- [ ] Overall stats:
+- [x] Dashboard page (`/dashboard`) as the home page for logged-in users
+- [x] "Continue Learning" card: most recent in-progress course with resume button
+- [x] Per-course progress: completed lessons / total, best quiz scores
+- [x] Overall stats:
   - Total XP
   - Current level with progress bar to next level
   - Current streak
   - Total lessons completed
   - Total quizzes passed
   - Courses completed
-- [ ] Visual progress rings/bars
-- [ ] API endpoint: `GET /api/progress/stats`
-- [ ] Responsive: stacks vertically on mobile
+- [x] Visual progress rings/bars
+- [x] API endpoint: `GET /api/progress/stats`
+- [x] Responsive: stacks vertically on mobile
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -502,18 +502,18 @@ User dashboard showing learning progress across all courses.
 XP earning, level calculation, and level-up celebrations.
 
 **Acceptance Criteria:**
-- [ ] XP award function triggered by:
+- [x] XP award function triggered by:
   - Lesson completion: +10 XP
   - Quiz completion: +25 XP + 5 per correct answer
   - Perfect quiz: +50 XP bonus
-- [ ] Level formula: `Level = floor(sqrt(XP / 25)) + 1`
-- [ ] XP gain animation on frontend (floating +XP number)
-- [ ] Level-up detection and celebration UI (confetti effect, congratulations modal)
-- [ ] XP and level displayed in header
-- [ ] XP and level displayed on profile page
-- [ ] API: `GET /api/user/stats` returns XP, level, nextLevelXP
+- [x] Level formula: `Level = floor(sqrt(XP / 25)) + 1`
+- [x] XP gain animation on frontend (floating +XP number)
+- [x] Level-up detection and celebration UI (confetti effect, congratulations modal)
+- [x] XP and level displayed in header
+- [x] XP and level displayed on profile page
+- [x] API: `GET /api/user/stats` returns XP, level, nextLevelXP
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -523,16 +523,16 @@ XP earning, level calculation, and level-up celebrations.
 Daily study streak tracking and display.
 
 **Acceptance Criteria:**
-- [ ] Track daily study activity (any lesson completed or quiz taken)
-- [ ] Streak increment: if last study was yesterday, increment streak
-- [ ] Streak reset: if last study was 2+ days ago, reset to 1
-- [ ] Streak continue: if last study was today, no change
-- [ ] Streak displayed in header with fire icon
-- [ ] Streak milestones: toast notification at 3, 7, 14, 30, 60, 100 days
-- [ ] Profile page shows current streak and longest streak
-- [ ] API endpoint updates streak on any study activity
+- [x] Track daily study activity (any lesson completed or quiz taken)
+- [x] Streak increment: if last study was yesterday, increment streak
+- [x] Streak reset: if last study was 2+ days ago, reset to 1
+- [x] Streak continue: if last study was today, no change
+- [x] Streak displayed in header with fire icon
+- [x] Streak milestones: toast notification at 3, 7, 14, 30, 60, 100 days
+- [x] Profile page shows current streak and longest streak
+- [x] API endpoint updates streak on any study activity
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -542,7 +542,7 @@ Daily study streak tracking and display.
 Achievement badges earned by meeting specific criteria.
 
 **Acceptance Criteria:**
-- [ ] Predefined badges (seeded in DB):
+- [x] Predefined badges (seeded in DB):
   - "First Steps" — Complete first lesson
   - "Quiz Taker" — Complete first quiz
   - "Quiz Master" — Score 100% on any quiz
@@ -555,12 +555,12 @@ Achievement badges earned by meeting specific criteria.
   - "Scholar" — Complete 3 courses
   - "Centurion" — Earn 1000 XP
   - "Grandmaster" — Reach Level 10
-- [ ] Badge check runs after each relevant action (lesson complete, quiz complete, etc.)
-- [ ] Badge earned: toast notification with badge icon and name
-- [ ] Profile page: badge showcase grid (earned badges colored, unearned greyed out)
-- [ ] Badge detail: click to see description and earn date
+- [x] Badge check runs after each relevant action (lesson complete, quiz complete, etc.)
+- [x] Badge earned: toast notification with badge icon and name
+- [x] Profile page: badge showcase grid (earned badges colored, unearned greyed out)
+- [x] Badge detail: click to see description and earn date
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
@@ -570,17 +570,17 @@ Achievement badges earned by meeting specific criteria.
 Weekly and all-time XP leaderboard.
 
 **Acceptance Criteria:**
-- [ ] Leaderboard page (`/leaderboard`)
-- [ ] Tabs: "This Week" and "All Time"
-- [ ] Displays: rank, avatar, name, XP, level, streak
-- [ ] Top 3 with special styling (gold #1, silver #2, bronze #3)
-- [ ] Current user highlighted regardless of position
-- [ ] If current user not in top N, show their rank at bottom
-- [ ] Weekly leaderboard: XP earned since last Monday 00:00 UTC
-- [ ] API: `GET /api/leaderboard?type=weekly|alltime&limit=50`
-- [ ] Responsive: card list on mobile, table on desktop
+- [x] Leaderboard page (`/leaderboard`)
+- [x] Tabs: "This Week" and "All Time"
+- [x] Displays: rank, avatar, name, XP, level, streak
+- [x] Top 3 with special styling (gold #1, silver #2, bronze #3)
+- [x] Current user highlighted regardless of position
+- [x] If current user not in top N, show their rank at bottom
+- [x] Weekly leaderboard: XP earned since last Monday 00:00 UTC
+- [x] API: `GET /api/leaderboard?type=weekly|alltime&limit=50`
+- [x] Responsive: card list on mobile, table on desktop
 
-**Status:** `open`
+**Status:** `done`
 
 ---
 
