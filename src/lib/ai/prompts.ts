@@ -24,7 +24,9 @@ When generating SVG visualizations:
 - Keep it simple — 3 to 7 visual elements maximum
 - Use white (#ffffff) or very light backgrounds
 - No external images, scripts, or CSS imports
-- Only use: rect, circle, ellipse, line, path, text, g, defs, linearGradient, marker, polyline, polygon`;
+- Only use: rect, circle, ellipse, line, path, text, g, defs, linearGradient, marker, polyline, polygon
+- Elements must NOT overlap each other — ensure adequate spacing between all shapes and text labels
+- Position text labels clearly outside or centered within their associated shapes, never crossing element boundaries`;
 
 export const COURSE_STRUCTURE_PROMPT = (sourceText: string) => `Analyze the following educational material and create a structured course outline.
 

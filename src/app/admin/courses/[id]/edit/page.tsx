@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -65,7 +65,6 @@ interface ChatMsg {
 
 export default function EditCoursePage() {
   const params = useParams();
-  const router = useRouter();
   const { data: session } = useSession();
 
   const [course, setCourse] = useState<CourseData | null>(null);
@@ -173,8 +172,8 @@ export default function EditCoursePage() {
     }
   };
 
-  const publishCourse = async () => {
-    if (!course) return;
+  const updateCourseStatus = async (newStatus: string) => {
+    if (!course || course.status === newStatus) return;
     try {
       await fetch(`/api/courses/${course.id}`, {
         method: "PUT",
@@ -183,13 +182,17 @@ export default function EditCoursePage() {
           title: course.title,
           description: course.description,
           learningObjectives: course.learningObjectives,
-          status: "PUBLISHED",
+          status: newStatus,
         }),
       });
-      toast.success("Course published!");
-      router.push("/courses");
+      setCourse((prev) => prev ? { ...prev, status: newStatus } : null);
+      if (newStatus === "PUBLISHED") {
+        toast.success("Course published!");
+      } else {
+        toast.success("Course unpublished — you can continue editing");
+      }
     } catch {
-      toast.error("Failed to publish");
+      toast.error("Failed to update status");
     }
   };
 
@@ -412,9 +415,15 @@ export default function EditCoursePage() {
               {previewMode ? <Edit3 className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               <span className="ml-1 hidden sm:inline">{previewMode ? "Edit" : "Preview"}</span>
             </Button>
-            <Button size="sm" onClick={publishCourse}>
-              Publish
-            </Button>
+            {course.status === "PUBLISHED" ? (
+              <Button size="sm" variant="outline" onClick={() => updateCourseStatus("IN_REVIEW")}>
+                Unpublish
+              </Button>
+            ) : (
+              <Button size="sm" onClick={() => updateCourseStatus("PUBLISHED")}>
+                Publish
+              </Button>
+            )}
           </div>
         </div>
 

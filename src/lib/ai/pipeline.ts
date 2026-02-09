@@ -89,7 +89,7 @@ export async function generateCourse(courseId: string): Promise<void> {
     const structure = await generateJSON<CourseStructure>(
       AUTHOR_SYSTEM_PROMPT,
       COURSE_STRUCTURE_PROMPT(course.sourceText),
-      8192
+      16384
     );
 
     await updateProgress(courseId, "Generating lesson content...");
@@ -127,7 +127,7 @@ export async function generateCourse(courseId: string): Promise<void> {
             previousLessons,
             moduleContext
           ),
-          4096
+          8192
         );
 
         fullModule.lessons.push({
@@ -165,48 +165,63 @@ export async function generateCourse(courseId: string): Promise<void> {
       }
     }
 
-    // Stage 4: Student Simulator - 3 rounds
+    // Stage 4: Student Simulator - 3 rounds (skip for large courses)
     let currentCourse = fullCourse;
-    for (let round = 1; round <= 3; round++) {
-      await updateProgress(courseId, `AI Student Review — Round ${round} of 3...`);
+    const courseJsonSize = JSON.stringify(fullCourse).length;
+    const skipReview = courseJsonSize > 100_000; // Skip if course JSON > 100KB
+    if (skipReview) {
+      console.log(`Skipping AI review: course JSON is ${(courseJsonSize / 1024).toFixed(0)}KB (too large for single-pass review)`);
+      await updateProgress(courseId, "Skipping AI review (large course), saving content...");
+    }
+    try {
+      for (let round = 1; !skipReview && round <= 3; round++) {
+        await updateProgress(courseId, `AI Student Review — Round ${round} of 3...`);
 
-      const feedback = await generateJSON<StudentFeedback>(
-        STUDENT_SIMULATOR_PROMPT(round),
-        `Review this course:\n${JSON.stringify(currentCourse, null, 2)}`,
-        8192
-      );
-
-      await prisma.courseReviewLog.create({
-        data: {
-          courseId,
-          roundNumber: round,
-          studentFeedback: JSON.stringify(feedback),
-          authorChanges: "",
-        },
-      });
-
-      if (feedback.issues.length > 0) {
-        await updateProgress(courseId, `Applying Round ${round} improvements...`);
-
-        const revised = await generateJSON<FullCourse>(
-          AUTHOR_SYSTEM_PROMPT + "\n\n" + AUTHOR_REVISION_PROMPT,
-          `## Current Course:\n${JSON.stringify(currentCourse, null, 2)}\n\n## Student Feedback:\n${JSON.stringify(feedback, null, 2)}`,
-          16384
+        const feedback = await generateJSON<StudentFeedback>(
+          STUDENT_SIMULATOR_PROMPT(round),
+          `Review this course:\n${JSON.stringify(currentCourse, null, 2)}`,
+          8192
         );
 
-        // Update review log with changes
-        await prisma.courseReviewLog.update({
-          where: {
-            id: (await prisma.courseReviewLog.findFirst({
-              where: { courseId, roundNumber: round },
-              orderBy: { createdAt: "desc" },
-            }))!.id,
+        await prisma.courseReviewLog.create({
+          data: {
+            courseId,
+            roundNumber: round,
+            studentFeedback: JSON.stringify(feedback),
+            authorChanges: "",
           },
-          data: { authorChanges: "Course revised based on feedback" },
         });
 
-        currentCourse = revised;
+        if (feedback.issues.length > 0) {
+          await updateProgress(courseId, `Applying Round ${round} improvements...`);
+
+          const revised = await generateJSON<FullCourse>(
+            AUTHOR_SYSTEM_PROMPT + "\n\n" + AUTHOR_REVISION_PROMPT,
+            `## Current Course:\n${JSON.stringify(currentCourse, null, 2)}\n\n## Student Feedback:\n${JSON.stringify(feedback, null, 2)}`,
+            16384
+          );
+
+          await prisma.courseReviewLog.update({
+            where: {
+              id: (await prisma.courseReviewLog.findFirst({
+                where: { courseId, roundNumber: round },
+                orderBy: { createdAt: "desc" },
+              }))!.id,
+            },
+            data: { authorChanges: "Course revised based on feedback" },
+          });
+
+          // Only accept revision if it preserved all modules
+          if (revised.modules.length >= currentCourse.modules.length) {
+            currentCourse = revised;
+          } else {
+            console.warn(`Review revision dropped modules (${revised.modules.length} vs ${currentCourse.modules.length}), keeping original`);
+          }
+        }
       }
+    } catch (reviewError) {
+      console.warn("AI review stage skipped (course too large for single-pass review):", reviewError instanceof Error ? reviewError.message : reviewError);
+      await updateProgress(courseId, "Skipped AI review (course too large), saving content...");
     }
 
     // Stage 5: Save to database

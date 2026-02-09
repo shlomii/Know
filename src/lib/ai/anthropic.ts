@@ -1,5 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 
+const MODEL = "claude-sonnet-4-5-20250929";
+
 const getClient = () => {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) throw new Error("ANTHROPIC_API_KEY is not set");
@@ -23,11 +25,15 @@ export async function generateJSON<T>(
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const response = await client.messages.create({
-        model: "claude-sonnet-4-5-20250929",
+        model: MODEL,
         max_tokens: maxTokens,
         system: systemPrompt,
         messages: [{ role: "user", content: userPrompt }],
       });
+
+      if (response.stop_reason === "max_tokens") {
+        throw new Error(`Response truncated (max_tokens=${maxTokens}). Increase maxTokens.`);
+      }
 
       const text = response.content
         .filter((block): block is Anthropic.TextBlock => block.type === "text")
@@ -35,9 +41,22 @@ export async function generateJSON<T>(
         .join("");
 
       // Extract JSON from response (handle markdown code blocks)
-      const jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/) || [null, text];
-      const jsonStr = jsonMatch[1]?.trim() || text.trim();
-      
+      // Use greedy match to get everything between first ```json and last ```
+      let jsonStr = text.trim();
+      const codeBlockStart = jsonStr.match(/```(?:json)?\s*\n?/);
+      if (codeBlockStart) {
+        const startIdx = codeBlockStart.index! + codeBlockStart[0].length;
+        const endIdx = jsonStr.lastIndexOf("```");
+        if (endIdx > startIdx) {
+          jsonStr = jsonStr.slice(startIdx, endIdx).trim();
+        }
+      }
+      // Also handle case where response is raw JSON (starts with { or [)
+      if (!jsonStr.startsWith("{") && !jsonStr.startsWith("[")) {
+        const firstBrace = jsonStr.search(/[{\[]/);
+        if (firstBrace !== -1) jsonStr = jsonStr.slice(firstBrace);
+      }
+
       try {
         return JSON.parse(jsonStr) as T;
       } catch {
@@ -60,7 +79,7 @@ export async function generateText(
   const client = getClient();
 
   const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
+    model: MODEL,
     max_tokens: maxTokens,
     system: systemPrompt,
     messages: [{ role: "user", content: userPrompt }],
@@ -80,7 +99,7 @@ export async function* streamText(
   const client = getClient();
 
   const stream = client.messages.stream({
-    model: "claude-sonnet-4-5-20250929",
+    model: MODEL,
     max_tokens: maxTokens,
     system: systemPrompt,
     messages: [{ role: "user", content: userPrompt }],
@@ -101,7 +120,7 @@ export async function chat(
   const client = getClient();
 
   const response = await client.messages.create({
-    model: "claude-sonnet-4-5-20250929",
+    model: MODEL,
     max_tokens: maxTokens,
     system: systemPrompt,
     messages,
