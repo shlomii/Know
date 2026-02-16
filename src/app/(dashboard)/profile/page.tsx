@@ -142,7 +142,7 @@ export default function ProfilePage() {
               Complete lessons and quizzes to earn badges!
             </p>
           ) : (
-            <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               {badges.map((badge) => (
                 <div
                   key={badge.id}

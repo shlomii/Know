@@ -192,7 +192,7 @@ export default function LessonPage() {
 
   const handleTouchEnd = (e: React.TouchEvent) => {
     const delta = e.changedTouches[0].clientX - touchStartX.current;
-    if (Math.abs(delta) > 80) {
+    if (Math.abs(delta) > 100) {
       if (delta > 0) handlePrev();
       else handleNext();
     }
@@ -254,7 +254,7 @@ export default function LessonPage() {
         {/* SVG Visualization — first page only */}
         {showSvg && (
           <div
-            className="w-full bg-gray-50 flex items-center justify-center p-4 border-b"
+            className="w-full bg-gray-50 flex items-center justify-center p-4 border-b overflow-hidden"
             dangerouslySetInnerHTML={{ __html: lesson.svgContent }}
           />
         )}
@@ -310,7 +310,7 @@ export default function LessonPage() {
       )}
 
       {/* Navigation */}
-      <div className="flex items-center justify-between mt-3 pb-4">
+      <div className="flex items-center justify-between mt-3 pb-20 md:pb-4">
         <Button
           variant="outline"
           onClick={handlePrev}

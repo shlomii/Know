@@ -46,7 +46,7 @@ export default function CoursesPage() {
     return (
       <div className="space-y-4">
         <div className="h-10 bg-gray-100 rounded-lg animate-pulse w-64" />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
           {[1, 2, 3].map((i) => (
             <div key={i} className="h-48 bg-gray-100 rounded-xl animate-pulse" />
           ))}
@@ -87,7 +87,7 @@ export default function CoursesPage() {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
           {filtered.map((course) => (
             <Card key={course.id} className="flex flex-col hover:shadow-md transition-shadow">
               <CardHeader>

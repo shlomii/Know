@@ -187,7 +187,7 @@ export default function QuizPage() {
         </div>
 
         {/* Actions */}
-        <div className="flex gap-3 justify-center pb-4">
+        <div className="flex gap-3 justify-center pb-20 md:pb-4">
           {!passed && (
             <Button variant="outline" onClick={retry} className="gap-1">
               <RotateCcw className="h-4 w-4" /> Retry Quiz
@@ -254,7 +254,7 @@ export default function QuizPage() {
         </CardContent>
       </Card>
 
-      <div className="flex justify-end mt-4 pb-4">
+      <div className="flex justify-end mt-4 pb-20 md:pb-4">
         <Button
           onClick={checkAnswer}
           disabled={!currentQuestion || !answers[currentQuestion.id]}

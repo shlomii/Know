@@ -11,6 +11,9 @@ const nunito = Nunito({
 export const metadata: Metadata = {
   title: "Know - AI-Powered Learning Platform",
   description: "Transform any material into interactive, bite-sized learning courses",
+  manifest: "/manifest.json",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
+  themeColor: "#4f46e5",
 };
 
 export default function RootLayout({

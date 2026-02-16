@@ -158,7 +158,7 @@ export default function CourseDetailPage() {
                     <li key={lesson.id}>
                       <Link
                         href={mod.locked ? "#" : `/courses/${course.id}/modules/${mod.id}/lessons/${lesson.id}`}
-                        className={`flex items-center justify-between p-2 rounded-lg text-sm hover:bg-gray-50 transition-colors ${
+                        className={`flex items-center justify-between p-3 rounded-lg text-sm hover:bg-gray-50 transition-colors ${
                           mod.locked ? "pointer-events-none" : ""
                         }`}
                       >
@@ -178,7 +178,7 @@ export default function CourseDetailPage() {
                     <li>
                       <Link
                         href={mod.locked ? "#" : `/courses/${course.id}/modules/${mod.id}/quiz`}
-                        className={`flex items-center justify-between p-2 rounded-lg text-sm hover:bg-gray-50 transition-colors font-medium text-indigo-600 ${
+                        className={`flex items-center justify-between p-3 rounded-lg text-sm hover:bg-gray-50 transition-colors font-medium text-indigo-600 ${
                           mod.locked ? "pointer-events-none" : ""
                         }`}
                       >

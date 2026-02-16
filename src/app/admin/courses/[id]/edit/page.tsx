@@ -350,7 +350,7 @@ export default function EditCoursePage() {
   ];
 
   return (
-    <div className="flex h-[calc(100vh-5rem)]">
+    <div className="flex min-h-[calc(100vh-5rem)]">
       {/* Sidebar - Module/Lesson outline */}
       <div className="hidden lg:block w-64 border-r bg-white overflow-y-auto shrink-0">
         <div className="p-4">
@@ -360,7 +360,7 @@ export default function EditCoursePage() {
               <button
                 onClick={() => { setCurrentModuleIndex(mi); setCurrentLessonIndex(0); setViewMode("lesson"); }}
                 className={cn(
-                  "text-xs font-semibold w-full text-left px-2 py-1 rounded",
+                  "text-xs font-semibold w-full text-left px-3 py-2 rounded",
                   mi === currentModuleIndex ? "text-indigo-700 bg-indigo-50" : "text-gray-600"
                 )}
               >
@@ -372,7 +372,7 @@ export default function EditCoursePage() {
                     key={l.id}
                     onClick={() => { setCurrentModuleIndex(mi); setCurrentLessonIndex(li); setViewMode("lesson"); }}
                     className={cn(
-                      "text-xs w-full text-left px-2 py-1 rounded truncate",
+                      "text-xs w-full text-left px-3 py-2 rounded truncate",
                       mi === currentModuleIndex && li === currentLessonIndex && viewMode === "lesson"
                         ? "text-indigo-600 bg-indigo-50 font-medium"
                         : "text-gray-500 hover:bg-gray-50"
@@ -384,7 +384,7 @@ export default function EditCoursePage() {
                 <button
                   onClick={() => { setCurrentModuleIndex(mi); setViewMode("quiz"); }}
                   className={cn(
-                    "text-xs w-full text-left px-2 py-1 rounded font-medium",
+                    "text-xs w-full text-left px-3 py-2 rounded font-medium",
                     mi === currentModuleIndex && viewMode === "quiz"
                       ? "text-indigo-600 bg-indigo-50"
                       : "text-gray-400 hover:bg-gray-50"
@@ -406,7 +406,7 @@ export default function EditCoursePage() {
             <Badge variant={course.status === "PUBLISHED" ? "default" : "secondary"}>
               {course.status}
             </Badge>
-            <span className="text-sm font-medium text-gray-700 truncate max-w-[200px]">
+            <span className="text-sm font-medium text-gray-700 truncate max-w-[120px] sm:max-w-[200px] md:max-w-[300px]">
               {course.title}
             </span>
           </div>
@@ -633,7 +633,7 @@ export default function EditCoursePage() {
                 onClick={() => {
                   setChatInput(action.prompt);
                 }}
-                className="text-xs px-2 py-1 rounded-full border border-indigo-200 text-indigo-600 hover:bg-indigo-50 transition-colors"
+                className="text-xs px-3 py-2 rounded-full border border-indigo-200 text-indigo-600 hover:bg-indigo-50 transition-colors"
               >
                 {action.label}
               </button>

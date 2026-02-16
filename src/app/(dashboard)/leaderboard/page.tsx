@@ -91,7 +91,7 @@ export default function LeaderboardPage() {
 
         <TabsContent value="alltime">
           <Card>
-            <CardContent className="pt-4">
+            <CardContent className="pt-4 pb-20 md:pb-4">
               {loading ? (
                 <div className="space-y-3">
                   {[1, 2, 3].map((i) => (
@@ -109,7 +109,7 @@ export default function LeaderboardPage() {
 
         <TabsContent value="weekly">
           <Card>
-            <CardContent className="pt-4">
+            <CardContent className="pt-4 pb-20 md:pb-4">
               {loading ? (
                 <div className="space-y-3">
                   {[1, 2, 3].map((i) => (
