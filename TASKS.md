@@ -592,81 +592,79 @@ Weekly and all-time XP leaderboard.
 Ensure all views work perfectly on mobile devices.
 
 **Acceptance Criteria:**
-- [ ] Test all pages at 320px, 375px, 414px widths
-- [ ] Touch targets minimum 44x44px
-- [ ] Swipe gestures on lesson cards (left = next, right = previous)
-- [ ] Bottom sheet for AI chat panel on mobile
-- [ ] Collapsible sidebar on tablet
-- [ ] PWA manifest for "Add to Home Screen"
-- [ ] Viewport meta tag configured correctly
-- [ ] No horizontal scroll on any page
-- [ ] Font sizes readable without zoom on mobile
+- [x] Test all pages at 320px, 375px, 414px widths
+- [x] Touch targets minimum 44x44px
+- [x] Swipe gestures on lesson cards (left = next, right = previous)
+- [x] Bottom sheet for AI chat panel on mobile
+- [x] Collapsible sidebar on tablet
+- [x] PWA manifest for "Add to Home Screen"
+- [x] Viewport meta tag configured correctly
+- [x] No horizontal scroll on any page
+- [x] Font sizes readable without zoom on mobile
 
-**Status:** `open`
+**Status:** `done`
 
 ---
-
 ### Issue #27 — Error handling & edge cases
 **Labels:** `P2`, `phase-7`, `backend`, `frontend`
 **Description:**
 Robust error handling throughout the application.
 
 **Acceptance Criteria:**
-- [ ] API error responses: consistent JSON format `{error, message, code}`
-- [ ] Anthropic API: handle rate limits (429), timeouts, malformed responses
-- [ ] Empty states: "No courses yet", "No progress yet", "No badges yet"
-- [ ] Loading skeletons on all data-fetching pages
-- [ ] File upload: handle corrupt PDFs, password-protected PDFs, empty files
-- [ ] Course generation: handle partial failures, allow retry of failed steps
-- [ ] Quiz: handle edge case of 0 questions
-- [ ] Auth: handle expired tokens, redirect to login
-- [ ] Global error boundary with "Something went wrong" page
+- [x] API error responses: consistent JSON format `{error, message, code}`
+- [x] Anthropic API: handle rate limits (429), timeouts, malformed responses
+- [x] Empty states: "No courses yet", "No progress yet", "No badges yet"
+- [x] Loading skeletons on all data-fetching pages
+- [x] File upload: handle corrupt PDFs, password-protected PDFs, empty files
+- [x] Course generation: handle partial failures, allow retry of failed steps
+- [x] Quiz: handle edge case of 0 questions
+- [x] Auth: handle expired tokens, redirect to login
+- [x] Global error boundary with "Something went wrong" page
 
-**Status:** `open`
+**Status:** `done`
 
 ---
-
 ### Issue #28 — Write tests (unit, integration, E2E)
 **Labels:** `P2`, `phase-7`, `testing`
 **Description:**
 Test coverage for critical paths.
 
 **Acceptance Criteria:**
-- [ ] Unit tests:
+- [x] Unit tests:
   - AI service helper functions (JSON parsing, SVG validation)
   - XP calculation and level formula
   - Streak logic (increment, reset, continue)
   - Badge criteria checking
-- [ ] Integration tests:
+- [x] Integration tests:
   - Auth API (register, login, protected routes)
   - Course CRUD API
   - Progress tracking API
   - Quiz submission API
-- [ ] E2E test (Playwright or Cypress):
+- [x] E2E test (Playwright or Cypress):
   - Full flow: register → login → admin uploads file → course generated → operator edits → publishes → learner enrolls → completes lesson → takes quiz → earns XP/badge
-- [ ] Test config: Jest for unit/integration, Playwright for E2E
+- [x] Test config: Jest for unit/integration, Playwright for E2E
 
-**Status:** `open`
+**Status:** `done`
 
 ---
-
 ### Issue #29 — Deployment configuration (Docker, env, migrations)
 **Labels:** `P2`, `phase-7`, `devops`
 **Description:**
 Make the application deployable.
 
 **Acceptance Criteria:**
-- [ ] `Dockerfile` for production build (multi-stage: build + runtime)
-- [ ] `docker-compose.yml` with app + PostgreSQL
-- [ ] `.env.example` with all required environment variables documented
-- [ ] Database migration runs on startup
-- [ ] Seed script for initial data (badges, admin user)
-- [ ] Health check endpoint: `GET /api/health`
-- [ ] Production Next.js build optimized (output: standalone)
-- [ ] README with setup and deployment instructions
+- [x] `Dockerfile` for production build (multi-stage: build + runtime)
+- [x] `docker-compose.yml` with app + PostgreSQL
+- [x] `.env.example` with all required environment variables documented
+- [x] Database migration runs on startup
+- [x] Seed script for initial data (badges, admin user)
+- [x] Health check endpoint: `GET /api/health`
+- [x] Production Next.js build optimized (output: standalone)
+- [x] README with setup and deployment instructions
 
-**Status:** `open`
+**Status:** `done`
 
+---
 ---
 
 ## Summary
